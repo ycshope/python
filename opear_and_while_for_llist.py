@@ -1,3 +1,4 @@
+#!/usr/bin/python
 #运算表达式
 #不支持++,但可以+= 
 a = 5.0
@@ -20,7 +21,7 @@ d = False
 print(not c)
 print(c and d)
 print(c or d)
-print(c is d) #a和b是同一个对象
+print(c is d) #a和b是同一个对象(id相同)
 print(c is not d) #a和b不是同一个对象
 
 #关系表达式
@@ -116,5 +117,4 @@ print(mylist[1:3])   #从2开始到第3个
 #连个list合并
 mylist1 = [True,"python"]
 mylist2 = mylist + mylist1
-print(mylist2)
-
+print(mylist2) 
