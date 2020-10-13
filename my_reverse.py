@@ -30,29 +30,40 @@ Constraints:
 
 '''
 class Solution:
-    def reverse(self):
-        Reverse_Begin = 0
-        #特殊情况,0直接返回
-        if self.x == 0:
+    def reverse(self, x):
+        #负数特殊处理
+        Is_lt_zero = False
+        if x < 0:
+            Is_lt_zero = True 
+            x *= -1
+        ans = 0
+        #翻转数字
+        #print("x = %d"%(x))
+        while int(x) != 0 : #python的类型个位数/10会转换为小数
+            #print("x= %d, ans = %d"%(x,ans))
+            ans *= 10
+            ans += int(x%10)
+            #边界条件可以提前
+            if ans<-2147483648 or ans>2147483647:
+                return 0
+            x = int(x/10)
+            
+        if Is_lt_zero:
+            ans *= -1
+            ''''
+        #边界条件
+        if ans<-2147483648 or ans>2147483647:
             return 0
-        #特殊情况,负数提取符号不翻转
-        elif self.x < 0
-            is_lt_zero = 1
-        #转换成字符串
-        self.x = str(self.x).reverse()
-        #最后把前面的0给消除,最后再转换成数字返回
-        if(self)
-        return self.x
-        
-    def __init__(self, x):
-        self.x = x
-        #print("self.x = %d"%(self.x))
+            '''
+        return ans
     
 if __name__ == "__main__":
 
-    arr_x = [ 123, -123 , 120 , 0 ]
+    arr_x = [ 123, -123 , 120 , 0 ,1534236469]
     
+    #Solution s     定义方法不对
+    s = Solution()
+
     for x in arr_x:
-        class_x = Solution(x)
-        print(class_x.reverse())
+        print(s.reverse(x))
     
