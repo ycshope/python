@@ -1,33 +1,23 @@
 '''
 Given a 32-bit signed integer, reverse digits of an integer.
-
 Note:
-Assume we are dealing with an environment that could only store integers within the 32-bit signed integer range: [−231,  231 − 1]. For the purpose of this problem, assume that your function returns 0 when the reversed integer overflows.
-
- 
-
+Assume we are dealing with an environment that could only store integers within the 32-bit signed integer range: [−231,  231 − 1]. For the purpose of this problem, assume that your function returns 0 when the reversed integer overflows.
+ 
 Example 1:
-
 Input: x = 123
 Output: 321
 Example 2:
-
 Input: x = -123
 Output: -321
 Example 3:
-
 Input: x = 120
 Output: 21
 Example 4:
-
 Input: x = 0
 Output: 0
- 
-
+ 
 Constraints:
-
 -231 <= x <= 231 - 1
-
 '''
 class Solution:
     def reverse(self, x):
@@ -57,6 +47,34 @@ class Solution:
             '''
         return ans
     
+    #参考解法1
+    #字符串的截取string[start : end : step]
+    #[start:end:step]表示从string的第start个索引位置开始到第end个索引之间截取子串，截取的步长是step
+    def reverse_force(self, x):
+        if -10 < x < 10:
+            return x
+        str_x = str(x)
+        if str_x[0] != "-":
+            str_x = str_x[::-1] 
+            x = int(str_x)
+        else:
+            str_x = str_x[:0:-1]
+            x = int(str_x)
+            x = -x
+        return x if -2147483648 < x < 2147483647 else 0
+        
+    #参考解法2
+    def reverse_better(self, x):
+        y, res = abs(x), 0  #多个变量赋值
+        # 则其数值范围为 [−2^31,  2^31 − 1]
+        boundry = (1<<31) -1 if x>0 else 1<<31 #这种写法类似gen_list,c++的:?
+        while y != 0:
+            res = res*10 +y%10
+            if res > boundry :
+                return 0
+            y //=10 #//= 取整除赋值运算符 c //= a 等效于 c = c // a,也就是不转换类型
+        return res if x >0 else -res
+    
 if __name__ == "__main__":
 
     arr_x = [ 123, -123 , 120 , 0 ,1534236469]
@@ -66,4 +84,3 @@ if __name__ == "__main__":
 
     for x in arr_x:
         print(s.reverse(x))
-    
