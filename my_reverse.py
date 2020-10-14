@@ -19,6 +19,7 @@ Output: 0
 Constraints:
 -231 <= x <= 231 - 1
 '''
+#学习内容：1.除号引起的类型转换 2.str的截取 3.条件赋值语句 4.//号的应用
 class Solution:
     def reverse(self, x):
         #负数特殊处理
@@ -28,15 +29,14 @@ class Solution:
             x *= -1
         ans = 0
         #翻转数字
-        #print("x = %d"%(x))
-        while int(x) != 0 : #python的类型个位数/10会转换为小数
+        while x != 0 : 
             #print("x= %d, ans = %d"%(x,ans))
             ans *= 10
             ans += int(x%10)
             #边界条件可以提前
             if ans<-2147483648 or ans>2147483647:
                 return 0
-            x = int(x/10)
+            x = int(x/10) #在进行过第一次的x/10以后,x就从int转换成float了
             
         if Is_lt_zero:
             ans *= -1
