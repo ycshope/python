@@ -55,6 +55,10 @@ class Solution:
        
 def twoSum(nums, target): #优化写法3
     hashmap={}
+    '''
+    enumerate会遍历nums,返回两个值,i是下标key,num是nums[i],
+    可以通过enumerate(nums,1)定义索引自定义所以的下标,默认是0
+    '''
     for i,num in enumerate(nums):
         if hashmap.get(target - num) is not None:
             return [i,hashmap.get(target - num)]
