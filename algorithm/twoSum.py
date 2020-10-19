@@ -44,7 +44,7 @@ class Solution:
             #print(type(My_Dict.get(self.nums[i])))  <class 'NoneType'>
             key = self.nums[i]
             pair_key = self.target - key #寻找target匹配
-            print("pair_key = "+str(pair_key))
+            #print("pair_key = "+str(pair_key))
             if(My_Dict.get(pair_key) != None):
                 return [My_Dict.get(pair_key), i]
             else:
