@@ -58,7 +58,7 @@ else:
     print("a < b")
 
 #循环语句
-
+'''
 passwd = 1
 while passwd == 1 :  #和c一样,无限循环
     passwd = input("输入0结束循环")
@@ -66,6 +66,19 @@ while passwd == 1 :  #和c一样,无限循环
     passwd = int(passwd)
     
 print("结束循环")
+'''
+#while和else搭配使用
+turn = 3
+passwd = 9 
+while turn :
+    guess_passwd = int(input("请输入密码: "))
+    if guess_passwd == passwd:
+        print("密码输入成功")
+        break;
+    turn -= 1
+else:
+    print("密码输入错误超过3次")#break结束的不会走这
+print("游戏结束")
 
 #for语句
 mylist = [1,"python",True,4.4,[1,2,4],["a","b"]] #list的元素类型没有限制

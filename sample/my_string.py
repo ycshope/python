@@ -27,6 +27,7 @@ str3 = r"kali\n"
 print("非转义:"+str3)
 
 #string.find和stl中的几乎一样
+#找不到会返回-1
 print("-"*50)
 print("str的方法")
 print("find")
@@ -103,6 +104,11 @@ def Get_seq():
     return "-".join([Get_subseq() for i in range(6)])
     
 print(Get_seq())
-    
-    
 
+#格式化输出
+name = "kali"
+age = 19
+str1 = f'i am {name} , {age} years old'
+print(str1)
+    
+#格式化输出
