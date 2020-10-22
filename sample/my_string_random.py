@@ -8,6 +8,12 @@ print("-"*50)
 print("随机生成一个[0,1)的数")
 print(random.random())
 
+#随机生成一个整数
+print("-"*50)
+print("随机生成一个整数")
+print(random.randint(10,20))
+
+
 #打乱次序
 print("-"*50)
 My_List = [i for i in range(0,20)]
