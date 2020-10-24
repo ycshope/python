@@ -65,6 +65,9 @@ class Solution:
             时间o(n),空间o(n)
             用列队实现
             Q1.怎么知道深度?
+            A: deep(node.clid)=deep(node)+1
+            如果通过列队来实现BFS有如下特性:
+                1.新进队的
     '''
     def minDepth(self, root: TreeNode) -> int:
         #边界条件：空树
@@ -81,6 +84,7 @@ class Solution:
         if root.right is not None:
             deep = min(self.minDepth(root.right),deep)
         return deep+1
+
         '''
         优化1
         childDepth的解释：
