@@ -16,20 +16,21 @@ def Get_Url(url):
         print("url error!")
         print(e)
         return None
-    
-    #返回网页,返回值是bytes类型,需要解码呈str
-    #data = response.read()
-    #context = data.decode('utf-8')
-    #return context
-    
+        
     #返回的code
-    #status = response.status
-    #print(status)
-    #return status
-    
+    code = response.status
+    #print(code)
+    #return code
+    if code == 200:
+    #返回网页,返回值是bytes类型,需要解码呈str
+        data = response.read()
+        context = data.decode('utf-8')
+        return context
+    else:
+        return code
     #返回的请求头
-    res_header = response.info()
-    return res_header
+    #res_header = response.info()
+    #return res_header
     '''
     #返回的cookies
     import http.cookiejar
