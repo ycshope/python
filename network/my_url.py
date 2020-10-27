@@ -57,5 +57,4 @@ if __name__ == "__main__":
         print(f"body={url_body}")
         print(f"url = {t_url}")
         i += 1
-        #time.sleep(1)
         

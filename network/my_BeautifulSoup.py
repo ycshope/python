@@ -3,7 +3,7 @@ from bs4 import BeautifulSoup
 #参考文档https://beautifulsoup.readthedocs.io/zh_CN/v4.4.0/
 import urllib.request
 
-url = "http://td.sangfor.com/#/defect/problem"
+url = "http://www.dudj.net/hongsejingdian/53/"
 
 headers = {
     "User-Agent" : "Mozilla/5.0 (Windows NT 6.1; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/75.0.3770.100 Safari/537.36",
