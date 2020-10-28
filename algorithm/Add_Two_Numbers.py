@@ -53,16 +53,14 @@ class Solution:
     #方法1.
         1.把l1,l2转换成数字int1,int2
         2.sum = int1+int2
-        3.翻转sum
-        4.把sum反向转换为ListNode
-        时间复杂度:len(l1)+len(l2)+len(sum)+len(rev_sum)
+        3.把sum反向转换为ListNode
+        时间复杂度:len(l1)+len(l2)+len(sum)
     #方法2.
         直接相加两个list,主要须考虑进位问题
 '''
 #方法1
 class Solution:
-
-    #类型转换
+     #类型转换
     def to_int(self, l:ListNode):
         sum = 0
         i = 0 #定义位数
@@ -74,24 +72,33 @@ class Solution:
             i += 1
         return sum
         
-    #翻转整数    
-    def revserve(self,num:int):
-        reverse_sum = 0
-        while num !=0:
-            reverse_sum = reverse_sum*10 + num%10
+    def to_reverse_ListNode(self, num:int):
+        head = ListNode(val=None)
+        tail = head
+        #边界值num=0会直接返回空头
+        if num == 0:
+            head.next = ListNode()
+        #tail每次指向尾结点
+        #case1.空结点时,head=tail,
+        #case2.非空结点时,tail.next=newnode;tail=newnode
+        #综合而言,引入head节点,head.val=None,tail=head
+        #无论对于case1,case2都是tail.next=newnode;tail=newnode
+        while num != 0:
+            val = num%10
             num //= 10
-        return reverse_sum
-        
-    def to_ListNode(self, num:int):
-        
-        
+            node = ListNode(val)
+            tail.next = node
+            tail = node
+        return head.next
+
     def addTwoNumbers(self, l1: ListNode, l2: ListNode):
         int1 = self.to_int(l1)
         int2 = self.to_int(l2)
-        print(f"int1={int1},int2={int2}")
+        #print(f"int1={int1},int2={int2}")
         sum = int1 + int2
-        reverse_sum = self.revserve(sum)
-        print(f"reverse_sum={reverse_sum}")
+        #print(f"sum={sum}")
+        #print(f"reverse_listnode={self.to_reverse_ListNode(sum)}")
+        return self.to_reverse_ListNode(sum)
         
     
 if __name__ == "__main__":
