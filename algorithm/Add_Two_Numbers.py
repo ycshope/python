@@ -108,4 +108,4 @@ if __name__ == "__main__":
     print(f"head1={head1}")
     print(f"head2={head2}")
     s = Solution()
-    s.addTwoNumbers(l1=head1 , l2=head2)
+    print(s.addTwoNumbers(l1=head1 , l2=head2))
