@@ -56,7 +56,21 @@ class Solution:
         3.把sum反向转换为ListNode
         时间复杂度:len(l1)+len(l2)+len(sum)
     #方法2.
-        直接相加两个list,主要须考虑进位问题
+        需要考虑的问题
+            1.进位
+            2.位数不相同时的处理
+        
+        思路:
+            
+            if min(i,j)>=0:    
+                l[k] = l1[i]+l2[j]
+                if  l[k]>=10:
+                    l[k+1] += 1
+            else:
+                l[k] = max(l1[i],l2[j])
+                
+            时间复杂度:max(len(l1),len(l2))+len(sum),
+            时间复杂度优化了min(len(l1),len(l2))
 '''
 #方法1
 class Solution:
@@ -99,6 +113,25 @@ class Solution:
         #print(f"sum={sum}")
         #print(f"reverse_listnode={self.to_reverse_ListNode(sum)}")
         return self.to_reverse_ListNode(sum)
+    #方法2    
+    '''
+        据题意可知链表数字位数是从小到大的
+
+        因为两个数字相加会产生进位，所以使用i来保存进位。
+        则当前位的值为(l1.val + l2.val + i) % 10
+        则进位值为(l1.val + l2.val + i) / 10
+        建立新node，然后将进位传入下一层。
+    '''
+    class Solution:
+    def addTwoNumbers2(self, l1: ListNode, l2: ListNode) -> ListNode:
+        def dfs(l, r, i):#装饰器
+            if not l and not r and not i: return None
+            s = (l.val if l else 0) + (r.val if r else 0) + i
+            node = ListNode(s % 10)
+            node.next = dfs(l.next if l else None, r.next if r else None, s // 10)
+            return node
+        return dfs(l1, l2, 0)
+
         
     
 if __name__ == "__main__":
