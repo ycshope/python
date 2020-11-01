@@ -28,11 +28,11 @@ class Student:
     
     def Root(self):  #通过对象的函数访问对象的私有函数
         self.__ShowPassWd()
-'''
+    '''
     @classmethod        也没办法通过类的函数访问对象的私有函数
     def ROOT(cls):
         return cls.__ShowPassWd()   
-'''        
+    '''        
         
     def __del__(self):
         #析构函数,但python不需要考虑内存释放问题
