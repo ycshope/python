@@ -1,82 +1,66 @@
-from openpyxl import load_workbook
-from openpyxl.workbook import Workbook 
+import openpyxl as xl
 import os
 import re
 import time
+from pathlib import Path
 #处理.xlsx
+'''
+    sel.excel   wb对象
+    self.sheet  ws对象
+ '''
 class Deal_Excel:
-    def __init__(self,tar_dir):
-        self.__dir = tar_dir
+    def __init__(self, filename, sheet_name = None):
+        path = Path(filename)
+        #文件名
+        self.filename = filename
+        
+        #excel对象
+        self.excel = xl.Workbook() if not path.exists() else xl.load_workbook(filename)
+            
         #支持的excel类型
-        self.__file_type = ["xlsm", "xlsx", "xltx", "xltm"]
-    
+        self.file_type_list = ["*.xlsm", "*.xlsx", "*.xltx", "*.xltm"]
+  
+        #sheet对象
+        #self.excel[]=self.excel.get_sheet_by_name
+        self.sheet = self.excel.create_sheet(index = 0 ,title = sheet_name) if sheet_name not in self.excel.sheetnames else self.excel[sheet_name]#[]=get_sheet_by_name
+        
+        print(f"max_column={self.sheet.max_column},max_row={self.sheet.max_row}")
+        
+    '''
+    析构函数 貌似调用前就先结束了
+    def __del__(self):
+        print(f"self.filename={self.filename}")
+        self.excel.save(self.filename)
+    '''
     #获取某个文件目录下的excel
-    def Get_Excel(self):
-        #扫描当前目录下的.xlsx
-        tar_dir = os.listdir(self.__dir)
-        #找到所有的Excel文件
-        self.Excel_List = []
-        for file in tar_dir:
-            if file.split(".")[-1] in self.__file_type: #xlsm读取比较慢
-                self.Excel_List.append(file)
-        print("excel文件列表:"+str(self.Excel_List))
-    
-    #打开excel文件
-    def Open_Excel(self):
-        for excel in self.Excel_List:
-            self.excel = load_workbook(excel,keep_vba=True)   
-            # 显示所有表名
-            print("显示所有表名:"+str(self.excel.sheetnames))
-            #遍历所有的sheet
-            for sheet in self.excel.sheetnames :
-                print("当前的sheet为:"+str(sheet))
-                self.Read_Sheet(sheet)
-    
-    #读sheet
-    def Read_Sheet(self, sheet_name):
-        #选择sheet
-        self.sheet = self.excel.get_sheet_by_name(sheet_name)
-        #访问指定的sheet的内容,通过指定范围(行 → 行)
-        for row in self.sheet.iter_rows(min_row=1, max_col=10, max_row=6):
-            for cell in row:
-                if cell.value != None:
-                    print(cell) #结果为<Cell Sheet1.A1>指定了元素
-                    print(cell.value)
-    
-    #附加数据
-    def Append_Line(self, contain):
+    def Get_All_Excel(self):
+        #扫描当前目录下的.excel
+        for file_type in self.file_type_list:
+            for file in self.dir.glob(file_type): #会返回找到的对象,
+                print(file)
+        
+     #附加数据
+    def Append_Line(self, contain = None):
         #会在文件的最后一行(从没数据开始的第一行,添加数据)
         self.sheet.append(contain)
-        self.excel.save(self.Excel_List[0])
+
+    #按照行读sheet
+    def Read_Line(self, min=0, max=None):
+        max = max or self.sheet.max_row
+        #访问指定的sheet的内容,通过指定范围(行 → 行)
+        for row in self.sheet.iter_rows(min_row=min, max_col=self.sheet.max_column, max_row=max):
+            #print(cell)结果为<Cell Sheet1.A1>指定了元素   
+            print([ cell.value for cell in row ])
+       
+    #读sheet的第col列
+    def Read_Col(self, col , start_row = 2):
+        #取值时sheet["a1"]=sheet.cell(1,1)
+        print([self.sheet.cell(row,col).value for row in range(start_row,self.sheet.max_row+1)])
     
-    #创建excel,和指定的sheet
-    def Create_Excel(self, filename, sheetname=None):
-        if filename is None:
-            print("请输入文件名!")
-            return False
-        self._filename = filename
-        if self._filename in self.__dir:
-            print("文件已存在!")
-            return False
-        #默认sheet为系统时间
-        if sheetname is None:
-            #sheetname = str(time.asctime(time.localtime(time.time()))) 包含特殊字符,无法创建
-            sheetname = str(time.time())
-        
- 
-        self.__excel_name = filename
-        #创建excel
-        #实例化
-        self.__excel = Workbook()
-        #激活 worksheet,默认对第一张表格进项操作
-        self.__sheet = self.__excel.active
-        #sheet命名
-        self.__sheet = sheetname
-        #冲突检测
-        #创建sheet
-        #self.__excel.create_sheet(sheetname) 新建的excel会默认携带一个名为"sheet"的sheet
-        self.__excel.save(self.__excel_name)
-          
 if __name__ == "__main__":
-    t = Deal_Excel("./")
-    t.Create_Excel("kali.xlsx")
+    filename = "shunshun.xlsx"
+    t_excel = Deal_Excel(filename=filename, sheet_name = "xiaokeai")
+    #t_excel.Append_Line(contain = ["hello","kali","mimi"])
+    #t_excel.Read_Line()
+    t_excel.Read_Col(col=2)
+    t_excel.excel.save(filename)
