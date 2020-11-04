@@ -58,9 +58,27 @@ class Deal_Excel:
         print([self.sheet.cell(row,col).value for row in range(start_row,self.sheet.max_row+1)])
     
 if __name__ == "__main__":
-    filename = "shunshun.xlsx"
-    t_excel = Deal_Excel(filename=filename, sheet_name = "xiaokeai")
+    filename = "genlist.xlsx"
+    t_excel = Deal_Excel(filename=filename, sheet_name = "200-interface")
     #t_excel.Append_Line(contain = ["hello","kali","mimi"])
     #t_excel.Read_Line()
-    t_excel.Read_Col(col=2)
+    #t_excel.Read_Col(col=2)
+    method = "POST"
+    url = "/api/v1/namespaces/namespace/interfaces"
+    i = 1
+    code = 200
+    #f-string大括号外如果需要显示大括号，则应输入连续两个大括号 {{ 和 }}：
+    for i in range(1,203):
+        body=f'''{{"vlanId":{i},
+        "name":"veth.{i}",
+        "ifType":"VLANIF",
+        "description":"",
+        "reverseRouteEnable":false,
+        "ipv4":{{"ipv4Mode":"STATIC","staticIp":[]}},
+        "ipv6":{{"ipv6Mode":"STATIC","staticIp":[],"ipv6Param":{{"mtu":1500,"enable":true}}}},
+        "mtu":1500,
+        "manage":{{"https":true,"ping":true,"ssh":false}}
+        }}'''
+        #print([method,url,body,code])
+        t_excel.Append_Line(contain = [method,url,body,code])
     t_excel.excel.save(filename)
