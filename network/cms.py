@@ -1,0 +1,15 @@
+'''
+what
+网站指纹(fingerprint)包括:
+    web容器:apache/IIS/nginx
+    web语言:PHP/JAVA/.Net
+    web开发框架:Django/ThinkPHP
+    web应用:PHPCMS
+why
+针对的特定指纹,可以进行定制化的策略
+how 
+用到的库:
+    buildwith:前端框架
+    cms指纹库
+    特定cms独有url的md5值
+'''
