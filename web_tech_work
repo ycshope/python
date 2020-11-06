@@ -1,0 +1,23 @@
+web技术架构如下:
+
+1.web前端安全:
+	1.1.html
+	1.2.css
+	1.3.js
+2.web通信安全:
+	2.1.http
+	2.2.https
+3.web容器安全:
+	3.1.IIS(windows)
+	3.2.nginx
+	3.3.apache
+	3.4.tomcat
+4.web后端安全:
+	4.1.PHP->PHPTHINK
+	4.2.JAVA->spring
+	4.3.PYTHON->Django
+	4.4.GO
+5.web数据安全:
+	5.1.mysql
+	5.2.oracle
+	5.3.redis
