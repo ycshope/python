@@ -1,0 +1,21 @@
+-------------问题的提出:类似人脸识别,这类几乎不可能用编程完成的问题-------
+1.import the data
+2.clean the data----清除重复,无效,不相关的数据,把数据给数字化
+3.split the data into traing/test sets-----通常是8:2
+4.create a model-----数据分析算法:常见的如:神经网络,决策树
+5.train the model
+6.make predictions
+7.evaluate and improve-----优化决策,可以更换model或者完善model
+
+
+
+-------------库和工具------------------------------
+1.numpy------提供多维数组
+2.pandas------提供数据分析,数据帧(2d)
+3.matplotlib-----二维绘图库
+4.scikit-learn----提供通用的算法库
+
+
+
+-------------数据科学项目----------------------
+caggle.com
