@@ -10,7 +10,15 @@ class Father:
         print(self.gun)
     def __del__(self):
         print("Father __del__")
-
+    @property
+    #主要用來獲取私有變量,Q:普通函數不是也可以嗎？
+    def ChName(self):
+        return self.__name
+    
+    @ChName.setter
+    #property+setter可以實現函數的讀寫
+    def ChName(self, name):
+        self.__name=name
 #子类
 class Children(Father):
     def __init__(self,name,age):
@@ -27,7 +35,7 @@ class Children(Father):
         #print(self.__name) 无法调用父成员的私有属性
         Father.Show(self) #只能通过调用父成员的函数来查看私有
         print(self.age)
-        print(self.gun)
+        print(self.gun)   #繼承父屬性
     def __del__(self):
         print("Children __del__")
 
@@ -49,3 +57,6 @@ if __name__ == "__main__":
     print("多态")
     CallShow(F1)
     CallShow(C1)
+
+    #裝飾器
+    # F1.ChName("hack!!")  ??

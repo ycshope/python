@@ -1,3 +1,4 @@
+
 #元组,和list的主要区别是元素内容只是可读,可以通过help(tuple)来查看函数
 
 def GetValue():

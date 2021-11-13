@@ -1,5 +1,6 @@
 #二进制文件的操作
-import struct   #二进制的头文件
+import struct  # 二进制的头文件
+
 
 def My_Write():
     file = open("./kali","w")
@@ -27,13 +28,26 @@ def My_Read():
         第二个参数标识要处理的二进制,注意类型必须是bytes
     '''
     data = file.read()
-    print(type(data))
+    print(type(data))  #<class 'bytes'>
     (name,age,identy) = struct.unpack("4sid",bytes(data))
     printf("name : "+name)
     printf("age : "+age)
     printf("id : "+identy)
     file.close()
 
+def My_Write2():
+    file = open("./kali","wb+") #以二進制打開文件
+    file.write("今晚打老虎！".encode('utf-8')) #寫入二進制需要用str.encode進行編碼  str->btyes
+    file.close()
+
+def My_Read2():
+    file = open("./kali","rb+") #以二進制打開文件
+    print(file.read().decode('utf-8')) #寫入二進制需要用str.decode進行解碼為str   bytes
+    file.close()
+
+
 if __name__ == "__main__":
-    My_Write()
-    My_Read()
+    # My_Write()
+    # My_Read()
+    My_Write2()
+    My_Read2()

@@ -63,3 +63,5 @@ if __name__ == "__main__":
     print("无法访问对象的私有函数")
     S1.Root()
     #Student.ROOT()
+
+    

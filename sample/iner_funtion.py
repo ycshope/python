@@ -6,17 +6,20 @@
 4.主要是写一些简单的对象,但会占用内存
 '''
 
+
 def out_fun():
 
     #count = 1
     count = [1]
-    #内部函数
+
+    #内部函数-閉包
     def in_fun():
-    #   count += 1  这个count和上面的作用域不一样
+        #   count += 1  这个count和上面的作用域不一样
         count[0] += 1
         print(count[0])
-        
+
     return in_fun
+
 
 if __name__ == "__main__":
 
@@ -24,7 +27,7 @@ if __name__ == "__main__":
     print(type(c1))
     for i in range(4):
         c1()
-    
+
     c2 = out_fun()
     #和上面引用的对象不一样
     for i in range(5):

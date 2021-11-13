@@ -4,11 +4,17 @@
 称第一个类为一个装饰器
 本质和C++的多态没什么区别
 原则不修改原来的类的代码
+
+主要用法:
+本來已經有了一個函數,希望添加新的功能并且不改變原有的功能
+
+裝飾器與閉包:
+    僅僅是傳入參數的不同,裝飾器的傳參是函數,閉包傳參是數據類型
 '''
 #装饰器,把需要装饰的函数作为参数
 def Digivice(base):
     def evolve():   #闭包
-        base()      #继承原函数
+        base()      #先調用原函数
         #装饰的函数
         if base.__name__ == "Agumon":
                 print("evolve to Greymon")
@@ -49,9 +55,26 @@ def Metal_Greymon():
 def War_Greymon():
     print("War_Greymon")
 
+#閉包
+def out_fun2():
+    a = 3
+    def in_fun2():
+        return a * a
+    return in_fun2  # <function out_fun2.<locals>.in_fun2 at 0x000001B80FD1E8C0>
+
 if __name__ == "__main__":
     Agumon()
     Greymon()
     Metal_Greymon()
     War_Greymon()
-    
+    d = out_fun2()
+    print(d)  #返回結果是一個函數地址
+
+    print(d())   #9
+
+import math
+def fun(n):
+    for i in range(n):
+        yield math.pow(i,2)
+
+

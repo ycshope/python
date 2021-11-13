@@ -1,4 +1,6 @@
 import os
+
+
 class My_File:
     def __init__(self):
         while True:
@@ -30,9 +32,9 @@ class My_File:
         filename = input("input a filename:")
         file = open(filename,"w")   #file类型
         contain = input("input a contain:")
-        file.write(contain)
+        file.write(contain)   #默認不會加換行字符,需要自行添加
         file.flush()#清空缓存
-        file.close()
+        file.close()   #文件需要關閉后才能讀取到剛寫入的内容
         
     def read(self): #读文件
         filename = input("input a filename:")
