@@ -9,7 +9,7 @@ import time
 
 class My_with_as():
     def __init__(self):
-        print(f"pwd=={os.getcwd()}")
+        # print(f"pwd=={os.getcwd()}")
         with open("D:\\git\\python\\sample\\my_url.py", "r",
                   encoding='utf-8') as TmpFile:  #open的结果返回给Tmpfile
             for line in TmpFile:   #说明文件类型以能遍历

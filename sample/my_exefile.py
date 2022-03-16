@@ -3,7 +3,7 @@ import struct  # 二进制的头文件
 
 
 def My_Write():
-    file = open("./kali","w")
+    file = open("./kali", "w")
     #写入二进制文件
     '''
         pack表示打包成二进制,
@@ -14,13 +14,14 @@ def My_Write():
         b"miku"格式化字符串的值在Python的类型是bytes类型。所以我们在bytes类型前面加上一个b就可以解决这个问题了
        注意struct.pack的返回值是一个bytes,所以要转换成str
     '''
-    data = struct.pack("4sid",b"miku",6,314)
+    data = struct.pack("4sid", b"miku", 6, 314)
     print(type(data))
     file.write(str(data))
     file.close()
 
+
 def My_Read():
-    file = open("./kali","r")
+    file = open("./kali", "r")
     #读取二进制文件
     '''
         unpack的返回值是一个元组
@@ -29,20 +30,22 @@ def My_Read():
     '''
     data = file.read()
     print(type(data))  #<class 'bytes'>
-    (name,age,identy) = struct.unpack("4sid",bytes(data))
-    printf("name : "+name)
-    printf("age : "+age)
-    printf("id : "+identy)
+    (name, age, identy) = struct.unpack("4sid", bytes(data))
+    printf("name : " + name)
+    printf("age : " + age)
+    printf("id : " + identy)
     file.close()
+
 
 def My_Write2():
-    file = open("./kali","wb+") #以二進制打開文件
-    file.write("今晚打老虎！".encode('utf-8')) #寫入二進制需要用str.encode進行編碼  str->btyes
+    file = open("./kali", "wb+")  #以二進制打開文件
+    file.write("今晚打老虎！".encode('utf-8'))  #寫入二進制需要用str.encode進行編碼  str->btyes
     file.close()
 
+
 def My_Read2():
-    file = open("./kali","rb+") #以二進制打開文件
-    print(file.read().decode('utf-8')) #寫入二進制需要用str.decode進行解碼為str   bytes
+    file = open("./kali", "rb+")  #以二進制打開文件
+    print(file.read().decode('utf-8'))  #寫入二進制需要用str.decode進行解碼為str   bytes
     file.close()
 
 
