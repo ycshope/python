@@ -75,11 +75,9 @@ class Solution:
         #思路:找到最小的target的下标
 
         def BiSearch(nums: list[int], target: int, start: int, end: int):
-            #边界
-            if start > end:
+            #边界,两个指针汇聚到一起
+            if start >= end:
                 return start
-            if start < 0:
-                return -1
 
             mid = (start + end) // 2
             num = nums[mid]
@@ -91,17 +89,40 @@ class Solution:
                                 start=mid + 1,
                                 end=end)
             else:
-                #nums[mid]>=target,那么结果在[start,mid)
-                return BiSearch(nums=nums, target=target, start=start, end=mid-1)
+                #nums[mid]>=target,那么结果在[start,mid]
+                return BiSearch(nums=nums, target=target, start=start, end=mid)
+
+        #边界条件:[]
+        if len(nums) == 0:
+            return [-1, -1]
 
         #边界条件长度为0直接返回
+        leftindex = BiSearch(nums=nums,
+                             target=target,
+                             start=0,
+                             end=len(nums) - 1)
+        rightindex = BiSearch(nums=nums,
+                              target=target + 1,
+                              start=0,
+                              end=len(nums) - 1)
 
-        return BiSearch(nums=nums, target=target, start=0, end=len(nums) - 1)
+        #能够找到taget
+        if nums[leftindex] == target:
+            #边界条件:[1],1;[2,2],2
+            if leftindex == rightindex or nums[rightindex] == target:
+                return [leftindex, rightindex]
+            return [leftindex, rightindex - 1]
+
+        #找不到taget直接返回结果
+        return [-1, -1]
 
 
 if __name__ == "__main__":
-    nums, target = [5, 7, 7, 7, 8, 10], 8
+    # nums, target = [5, 7, 7, 7, 8, 10], 8
     # nums, target = [5, 7, 7, 8, 8, 10], 6
+    # nums, target = [5, 7, 7, 8, 8, 10], 8
+    nums, target = [2, 2], 2
     # nums, target = [], 0
+    # nums, target = [1], 1
     s = Solution()
     print(s.searchRange2(nums=nums, target=target))
